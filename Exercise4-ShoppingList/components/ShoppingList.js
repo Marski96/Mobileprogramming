@@ -20,6 +20,7 @@ export default class ShoppingList extends React.Component {
         
     }
 
+    //set new empty array
     buttonClear = () => {
         this.setState({
             ShoppingList: [],
