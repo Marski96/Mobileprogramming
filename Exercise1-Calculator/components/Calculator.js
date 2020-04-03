@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import { render } from 'react-dom';
 
+//Calculator
 export default class Calculator extends React.Component {
     constructor(props) {
         super(props);    
