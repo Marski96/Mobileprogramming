@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import { render } from 'react-dom';
 
+//Number Game
 export default class NumberGame extends React.Component {
     constructor(props) {
         super(props);    
