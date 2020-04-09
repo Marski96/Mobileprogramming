@@ -1,11 +1,28 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import MultipageCalculatorScreen from './components/MultipageCalculator';
+import History from './components/screens/History';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen 
+            name="MultipageCalculatorScreen"
+            component={MultipageCalculatorScreen}
+            options={{title: 'Calculator'}}
+          />
+          <Stack.Screen 
+            name="HistoryScreen"
+            component={History}
+            options={{title: 'History'}}
+          />
+        </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
