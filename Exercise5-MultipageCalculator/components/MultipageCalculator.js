@@ -5,6 +5,7 @@ import History from './screens/History'
 // Add also imports
 // This is the calculator page
 // navigation prop is passed in to every screen component (definition) in stack navigator
+//Exercise done
 export default function MultipageCalculatorScreen({ navigation }) {
 
     const [value1, setValue1] = useState('')
