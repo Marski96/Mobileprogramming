@@ -1,25 +1,43 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, FlatList, Alert } from 'react-native';
-import { render } from 'react-dom';
-
+import React, { useState } from 'react';
+import { Text, View, TextInput, Button, FlatList, TouchableOpacity } from 'react-native';
 import History from './screens/History'
 
 // Add also imports
-// This is the first page
+// This is the calculator page
 // navigation prop is passed in to every screen component (definition) in stack navigator
 export default function MultipageCalculatorScreen({ navigation }) {
 
-    const [value1, setValue1] = React.useState('')
-    const [value2, setValue2] = React.useState('')
-    const [result, setResult] = React.useState('')
+    const [value1, setValue1] = useState('')
+    const [value2, setValue2] = useState('')
+    const [result, setResult] = useState('')
+    const [history, setHistory] = useState('')
 
     const plusPressed = () => {
-        setResult(parseInt(value1) + parseInt(value2))
-        navigation.navigate('HistoryScreen', {results: result})
+        
+        let calculateResult = parseInt(value1) + parseInt(value2)
+        setResult(calculateResult)
+
+        let expression = value1 + ' + ' + value2 + ' = ' + calculateResult
+        setHistory(expression)
+
+        console.log(expression)
+        navigation.navigate('HistoryScreen', {history: history})
     }
 
     const minusPressed = () => {
-        setResult(parseInt(value1) - parseInt(value2))
+        let calculateResult = parseInt(value1) - parseInt(value2)
+        setResult(calculateResult)
+
+        let expression = value1 + ' - ' + value2 + ' = ' + calculateResult
+        setHistory(expression)
+
+        navigation.navigate('HistoryScreen', {history: history})
+        console.log(expression)
+
+    }
+
+    const pressHandler = () => {
+        navigation.navigate('HistoryScreen', {history: ''})
     }
 
     return (
@@ -30,6 +48,7 @@ export default function MultipageCalculatorScreen({ navigation }) {
             alignItems: 'center',
             justifyContent: 'center'
         }}>
+
             <Text 
                 style={{textAlign:'center', fontSize: 18}}>
                 Result: {result}
@@ -60,9 +79,9 @@ export default function MultipageCalculatorScreen({ navigation }) {
 
                 <Button 
                     title='History' 
-                    onPress={() => navigation.navigate('HistoryScreen')}/>
+                    onPress={pressHandler}/>
+                    
             </View>
-                
         </View>
     );
 }

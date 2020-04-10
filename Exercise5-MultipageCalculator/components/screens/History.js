@@ -1,9 +1,9 @@
-// This is the first page
+// This is the history page
 import React from 'react';
 import { View, Text, FlatList, Button } from 'react-native';
 
-export default function HistoryScreen({ route, navigation }) {
-    const { results } = route.params;
+export default function HistoryScreen({ navigation, route }) {
+    const {history} = route.params;
 
     return (
         <View
@@ -14,8 +14,7 @@ export default function HistoryScreen({ route, navigation }) {
             justifyContent: 'center'
         }}>
             <Text>History</Text>
-            <Text>{results}</Text>
-
+            <Text>{history}</Text>
         </View>
 
     );
