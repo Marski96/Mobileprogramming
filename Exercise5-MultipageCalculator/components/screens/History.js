@@ -14,7 +14,13 @@ export default function HistoryScreen({ navigation, route }) {
             justifyContent: 'center'
         }}>
             <Text>History</Text>
-            <Text>{history}</Text>
+            
+        {history.map((item, key)=>(
+         <Text key={key}> { item } </Text>)
+         )}
+        
+
+
         </View>
 
     );

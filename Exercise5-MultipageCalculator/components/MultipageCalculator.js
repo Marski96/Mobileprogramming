@@ -10,7 +10,7 @@ export default function MultipageCalculatorScreen({ navigation }) {
     const [value1, setValue1] = useState('')
     const [value2, setValue2] = useState('')
     const [result, setResult] = useState('')
-    const [history, setHistory] = useState('')
+    const [history, setHistory] = useState([])
 
     const plusPressed = () => {
         
@@ -18,10 +18,8 @@ export default function MultipageCalculatorScreen({ navigation }) {
         setResult(calculateResult)
 
         let expression = value1 + ' + ' + value2 + ' = ' + calculateResult
-        setHistory(expression)
-
-        console.log(expression)
-        navigation.navigate('HistoryScreen', {history: history})
+        history.push(expression)
+        console.log(history)
     }
 
     const minusPressed = () => {
@@ -29,15 +27,9 @@ export default function MultipageCalculatorScreen({ navigation }) {
         setResult(calculateResult)
 
         let expression = value1 + ' - ' + value2 + ' = ' + calculateResult
-        setHistory(expression)
-
-        navigation.navigate('HistoryScreen', {history: history})
+        history.push(expression)
         console.log(expression)
 
-    }
-
-    const pressHandler = () => {
-        navigation.navigate('HistoryScreen', {history: ''})
     }
 
     return (
@@ -79,7 +71,7 @@ export default function MultipageCalculatorScreen({ navigation }) {
 
                 <Button 
                     title='History' 
-                    onPress={pressHandler}/>
+                    onPress={() => navigation.navigate('HistoryScreen', {history: history})}/>
                     
             </View>
         </View>
