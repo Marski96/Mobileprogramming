@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "HelloWorld",
+    "name": "Exercise6-NumberGuessingGameWithHi-score",
     "slug": "Exercise6-NumberGuessingGameWithHi-score",
     "platforms": [
       "ios",
