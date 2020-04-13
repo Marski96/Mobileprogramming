@@ -1,71 +1,66 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, FlatList, Alert } from 'react-native';
+import { Alert, StyleSheet, Text, View, Button, TextInput, FlatList, Image } from 'react-native';
 
 export default function RecipeFinder() {
-    const [inputValue, setInputValue] = useState('');
-    const [recipes, setRecipes] = useState([]);
+  const [ingredient, setIngredient] = useState('');
+  const [recipes, setRecipes] = useState([]);
 
-    const getRecipes = () => {
-        const url = 'http://www.recipepuppy.com/api/?i=' + inputValue;
-        fetch(url)
-        .then((response) => response.json())
-        .then((responseJson) => {
-            setRecipes(responseJson);
-            console.log(recipes)
-        })
-        .catch((error) => {
-            Alert.alert('Error', error);
-        });
-    }
-
-    const listSeparator = () => {
-        return (
-          <View
-            style={{
-              height: 1,
-              width: "80%",
-              backgroundColor: "#CED0CE",
-              marginLeft: "10%"
-            }}
-          />
-        );
-      };
-
-            <FlatList 
-                    style={{marginLeft : "5%"}}
-                    keyExtractor={item => item.id} 
-                    renderItem={({item}) => <Text>{item.title}, {item.company}</Text>} 
-                    ItemSeparatorComponent={listSeparator}
-                    data={recipes} 
-            />  
+  const getRecipes = () => {
+    const url = 'http://www.recipepuppy.com/api/?i=' + ingredient;
+    fetch(url)
+    .then((response) => response.json())
+    .then((responseJson) => { 
+       setRecipes(responseJson.results);
+       console.log(recipes)
+    })
+    .catch((error) => { 
+      Alert.alert('Error' , error); 
+    }); 
+  }
+  
+  const listSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#CED0CE",
+        }}
+      />
+    );
+  };
 
   return (
-    <View>
+    <View style={styles.container}>
 
-        
-            <TextInput
-                    style={{width:100, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(inputValue) => setInputValue(inputValue)}
-                />
+      <FlatList
+        style={{marginLeft : "5%"}}
+        keyExtractor={item => item.title}
+        renderItem={({item}) => 
+                <View style={{paddingTop:15}}>
+                    <Text>{item.title}</Text>
+                    <Image source={{uri: item.thumbnail}}
+                            style={{width: 200, height: 200}} />
+                </View>
+            }
+        data={recipes}
+      /> 
 
-            <View style={{paddingBottom: 5}}/>
-
-             <Button
-                title='Find'
-                onPress={getRecipes}
-            />
-
-            <View style={{paddingBottom: 50}}/>
-
-        </View>
+      <TextInput 
+        style={{fontSize: 18, width: 200, borderColor: 'gray', borderWidth: 1}} 
+        value={ingredient} 
+        onChangeText={(ingredient) => setIngredient(ingredient)} 
+      />
+     <Button title="Find" onPress={getRecipes} />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+ container: {
+  flex: 1,
+  backgroundColor: '#fff',
+  alignItems: 'center',
+  justifyContent: 'center',
+ },
 });
