@@ -11,6 +11,7 @@ export default function RecipeFinder() {
         .then((response) => response.json())
         .then((responseJson) => {
             setRecipes(responseJson);
+            console.log(recipes)
         })
         .catch((error) => {
             Alert.alert('Error', error);
@@ -30,15 +31,18 @@ export default function RecipeFinder() {
         );
       };
 
+            <FlatList 
+                    style={{marginLeft : "5%"}}
+                    keyExtractor={item => item.id} 
+                    renderItem={({item}) => <Text>{item.title}, {item.company}</Text>} 
+                    ItemSeparatorComponent={listSeparator}
+                    data={recipes} 
+            />  
+
   return (
     <View>
-        <FlatList 
-        style={{marginLeft : "5%"}}
-        keyExtractor={item => item.id} 
-        renderItem={({item}) => <Text>{item}</Text>} 
-        ItemSeparatorComponent={listSeparator}
-        data={recipes} 
-        /> 
+
+        
             <TextInput
                     style={{width:100, borderColor: 'gray', borderWidth: 1}}
                     onChangeText={(inputValue) => setInputValue(inputValue)}
